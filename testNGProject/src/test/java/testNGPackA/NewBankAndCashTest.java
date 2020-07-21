@@ -49,6 +49,7 @@ public class NewBankAndCashTest
 		System.out.println("Generated random id is Acct"+randNum);
 		// OR simply you can write like below
 		//driver.findElement(ACCOUNT_TITLE_LOCATOR).sendKeys("Acct"+ new Random().nextInt(999));
+		
 		driver.findElement(By.cssSelector("input[id='description']")).sendKeys("Account created");
 		driver.findElement(By.cssSelector("input[id='balance']")).sendKeys("1000");
 		driver.findElement(By.xpath("//button[@type='submit'][@class='btn btn-primary']")).click();

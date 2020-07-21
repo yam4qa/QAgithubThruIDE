@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 public class NewProductAndServicesTest 
 {
 	WebDriver driver;
+	
 	@BeforeMethod
 	public void startOff()
 	{

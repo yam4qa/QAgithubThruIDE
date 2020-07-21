@@ -46,7 +46,6 @@ public class SelectDropDownTest
 		Thread.sleep(1000);
 		
 // Instead of using selectors we can use 'select' class for dropdown But tagname should be'select' in DOM
-		
 		//select the third dropdown using "select by index"
 		//Select index = new Select(driver.findElement(By.id("month")));//OR
 		Select index = new Select(driver.findElement(By.cssSelector("select#month")));
