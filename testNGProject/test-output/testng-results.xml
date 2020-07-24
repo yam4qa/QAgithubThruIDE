@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="20545" started-at="2020-07-24T00:37:56 CDT" finished-at="2020-07-24T00:38:17 CDT">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="20545" started-at="2020-07-24T00:37:56 CDT" finished-at="2020-07-24T00:38:17 CDT">
+      <class name="testNGPackA.NewProductAndServicesTest">
+        <test-method status="PASS" signature="startOff()[pri:0, instance:testNGPackA.NewProductAndServicesTest@2f490758]" name="startOff" is-config="true" duration-ms="5562" started-at="2020-07-24T00:37:56 CDT" finished-at="2020-07-24T00:38:02 CDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- startOff -->
+        <test-method status="PASS" signature="userShouldBeAbleToAddDeposite()[pri:0, instance:testNGPackA.NewProductAndServicesTest@2f490758]" name="userShouldBeAbleToAddDeposite" duration-ms="14941" started-at="2020-07-24T00:38:02 CDT" finished-at="2020-07-24T00:38:17 CDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- userShouldBeAbleToAddDeposite -->
+        <test-method status="PASS" signature="closeAll()[pri:0, instance:testNGPackA.NewProductAndServicesTest@2f490758]" name="closeAll" is-config="true" duration-ms="1" started-at="2020-07-24T00:38:17 CDT" finished-at="2020-07-24T00:38:17 CDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeAll -->
+      </class> <!-- testNGPackA.NewProductAndServicesTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

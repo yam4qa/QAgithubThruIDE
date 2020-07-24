@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -57,9 +58,9 @@ public class NewProductAndServicesTest
 		driver.findElement(NEW_PRODUCT_LOCATOR).click();
 		Thread.sleep(1000);
 		
-		waitForDriver(driver,10,PRODCUT_HEADING_LOCATOR);
+		waitForElement(driver,10,PRODCUT_HEADING_LOCATOR);
 		Random rand = new Random();
-		String randName = "TFP"+rand.nextInt(999);
+		String randName = "TFP"+rand.nextInt(9999);
 		System.out.println("Generated random name for product is "+randName);
 		// OR simply you can write like below
 		//driver.findElement(PRODUCT_NAME_LOCATOR).sendKeys("TFP"+ new Random().nextInt(999));
@@ -70,37 +71,61 @@ public class NewProductAndServicesTest
 		
 		// displaying the product list and searching for the created product and then deleting
 		driver.findElement(PRODUCTLIST_LOCATOR).click();
-		waitForDriver(driver,10,PRODCUT_HEADING_LOCATOR);
-		List<WebElement> ProductElementList = driver.findElements(By.xpath("//table/descendant::td/descendant::a"));
-		Assert.assertTrue(isElementTextMatch(randName, ProductElementList), "Deposit unsucessfull!");
+		waitForElement(driver,10,PRODCUT_HEADING_LOCATOR);
 		
+		//By PRODUCT_ELEMENT_TODELETE_LOCATOR = By.xpath("//a[text()='"+randName+"']/parent::td/following-sibling::td/descendant::a[contains(text(),'Delete')]");
+		//OR
+		By PRODUCT_ELEMENT_TODELETE_LOCATOR = By.xpath("//a[text()='"+randName+"']/parent::td/following-sibling::td/descendant::a[2]");
+		waitForElement(driver , 10 , PRODUCT_ELEMENT_TODELETE_LOCATOR);
+		scrollDown(driver);
+		WebElement PRODUCT_ELEMENT_TODELETE = driver.findElement(PRODUCT_ELEMENT_TODELETE_LOCATOR);
+		PRODUCT_ELEMENT_TODELETE.click();
+		
+		By ALERT_OK_BUTTON_LOCATOR = By.xpath("//button[text()='OK']");
+		waitForElement(driver , 10 , ALERT_OK_BUTTON_LOCATOR);
+		driver.findElement(ALERT_OK_BUTTON_LOCATOR).click();
+		
+		//List<WebElement> ProductElementList = driver.findElements(By.xpath("//table/descendant::td/descendant::a"));
+		//Assert.assertTrue(isElementTextMatch(randName, ProductElementList), "Deposit unsucessfull!");
+		By SUCCESS_ALERT_LOCATOR = By.xpath("//div[@id='page-wrapper']/descendant::button[@data-dismiss='alert']/following-sibling::i[@class='fa-fw fa fa-check']");
+
+		waitForElement(driver , 10 , SUCCESS_ALERT_LOCATOR);
+		System.out.println(" Product Delete Sucessfull! ");
 	}
 	
 	public boolean isElementTextMatch(String expectedDescrption ,List<WebElement> elementList ) throws InterruptedException
 	{
 		for (int i=0 ; i< elementList.size() ; i++)
 		{
-			System.out.println("element " + i +" value is : " +elementList.get(i).getText());
+			//System.out.println("element " + i +" value is : " +elementList.get(i).getText());
 			if(elementList.get(i).getText().equalsIgnoreCase(expectedDescrption))
 			{
+				scrollDown(driver);
 				System.out.println("td - " + (i+1) + " value " + elementList.get(i).getText() + " matched");
+				Thread.sleep(1000);
 				elementList.get(i+2).click();
-				new WebDriverWait(driver , 30).until(ExpectedConditions.alertIsPresent());
-				driver.switchTo().alert().accept();
+				
+				By ALERT_OK_BUTTON_ELEMENT = By.xpath("//button[text()='OK']");
+				waitForElement(driver , 10 , ALERT_OK_BUTTON_ELEMENT);
+				driver.findElement(ALERT_OK_BUTTON_ELEMENT).click();
+				//new WebDriverWait(driver,10).until(ExpectedConditions.alertIsPresent());
+				//driver.switchTo().alert().accept();
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	public void waitForDriver(WebDriver driver , int time , By locator)
-	{
-		new WebDriverWait(driver , time).until(ExpectedConditions.visibilityOfElementLocated(locator));
-	}
-	
 	public void waitForElement(WebDriver driver , int time , By locator)
 	{
 		new WebDriverWait(driver,time).until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+	
+	private void scrollDown(WebDriver driver) 
+	{
+//		JavascriptExecutor JsE = (JavascriptExecutor) driver;
+//		JsE.executeScript("scroll(0 , 100000)");
+		((JavascriptExecutor) driver).executeScript("scroll(0,10000)");
 	}
 	
 	@AfterMethod
